@@ -22,7 +22,7 @@ def rapport():
 def nouveau():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('new', 'Thomas', '333, Rue de la Paix, 75002 Paris');")
+    cursor.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?);",('new', 'Thomas', '333, Rue de la Paix, 75002 Paris'))
     conn.close()
     #return render_template('nouveau.html')
 
