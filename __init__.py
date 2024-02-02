@@ -19,7 +19,7 @@ def rapport():
     return render_template('graphique.html')
 
 @app.route("/histogramme/")
-def rapport():
+def histogramme():
     return render_template('histogramme.html')
   
 @app.route('/paris/')
