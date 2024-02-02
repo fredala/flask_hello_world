@@ -10,16 +10,20 @@
     function drawChart() {
       // DEBUT
    
-    /*  // Récupération de données depuis notre API /paris/
+    // Récupération de données depuis notre API /paris/
       fetch('/paris/')
         .then(response => response.json())
-        .then(data => {
+        .then(dataa => {
        
-    }) */
- /*data.results.forEach(entry => {
+    }) 
+ dataa.results.forEach(entry => {
       var date = new Date(entry.Jour * 1000);
-      data.addRow([date.toLocaleDateString(), entry.temp]);
-    });*/
+      dataa.addRow([date.toLocaleDateString(), entry.temp]);
+     alert( date.toLocaleDateString() +"  """+ entry.temp);
+    });
+
+    
+
       //END
       
       var data = google.visualization.arrayToDataTable([
