@@ -1,7 +1,34 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Histogramme</title>
-    
-  </body>
+<head>
+  <title>Graphique des températures de Paris</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Jour', 'Température'],
+        ['Jour 1', 20],
+        ['Jour 2', 22],
+        // Inclure les températures pour les 16 prochains jours ici
+        ['Jour 16', 18]
+      ]);
+
+      var options = {
+        title: 'Températures de Paris pour les 16 prochains jours',
+        hAxis: {title: 'Jour', titleTextStyle: {color: '#333'}},
+        vAxis: {minValue: 0},
+        colors: ['#1f77b4']
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div id="chart_div" style="width: 100%; height: 400px;"></div>
+</body>
 </html>
