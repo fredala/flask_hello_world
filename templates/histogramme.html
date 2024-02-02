@@ -10,12 +10,12 @@
     function drawChart() {
       // DEBUT
    
-     /*  // Récupération de données depuis notre API /paris/
+    /*  // Récupération de données depuis notre API /paris/
       fetch('/paris/')
         .then(response => response.json())
         .then(data => {
-        drawChart(data);
-    })*/
+       
+    }) */
  /*data.results.forEach(entry => {
       var date = new Date(entry.Jour * 1000);
       data.addRow([date.toLocaleDateString(), entry.temp]);
@@ -30,6 +30,9 @@
         ['Jour 16', 18]
       ]);
 
+
+      
+
       var options = {
         title: 'Températures de Paris pour les 16 prochains jours',
         hAxis: {title: 'Jour', titleTextStyle: {color: '#333'}},
@@ -39,6 +42,7 @@
 
       var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
       chart.draw(data, options);
+      
     }
   </script>
 </head>
