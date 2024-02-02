@@ -58,10 +58,10 @@ def Readfiche(post_id):
 
 
 @app.route('/search/<str:nom>')
-def Search(nom):
+def Search(nom_search):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM clients WHERE nom LIKE ?', ('%' +nom+'%',))
+    cursor.execute('SELECT * FROM clients WHERE nom LIKE ?', ('%' + nom_search +'%',))
     data = cursor.fetchall()
     conn.close()
     
