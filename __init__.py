@@ -15,7 +15,7 @@ def monfr():
     return "<h2>Bonjour tout le monde !</h2>"
   
 @app.route("/rapport/")
-def monfr():
+def rapport():
     return render_template('graphique.html')
   
 @app.route('/paris/')
