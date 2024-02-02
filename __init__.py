@@ -18,9 +18,20 @@ def monfr():
 def rapport():
     return render_template('graphique.html')
 
+@app.route("/nouveau/")
+def nouveau():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT into clients values ('eee','eeef,'rrrr'";)
+    conn.close()
+    #return render_template('nouveau.html')
+
+
 @app.route("/histogramme/")
 def histogramme():
     return render_template('histogramme.html')
+
+
   
 @app.route('/paris/')
 def meteo():
