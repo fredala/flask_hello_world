@@ -57,7 +57,7 @@ def Readfiche(post_id):
     return render_template('read_data.html', data=data)
 
 
-@app.route('/search/<int:nom_search>')
+@app.route('/search/<nom_search>')
 def Search(nom_search):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
