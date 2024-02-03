@@ -18,7 +18,7 @@ def monfr():
 def rapport():
     return render_template('graphique.html')
 
-@app.route('/nouveau/', methods=['GET', 'POST']))
+@app.route("/nouveau/", methods=['GET', 'POST'])
 def nouveau():
   if request.method == 'POST':
     # Récupérer les données du formulaire
