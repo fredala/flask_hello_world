@@ -23,7 +23,7 @@ def nouveau():
         #print(f"Nom: {nom}")
         #print(f"prenom: {prenom}")
         #print(f"adresse: {adresse}")
-        return render_template('confirmation.html')
+        return render_template('formulaire.html')
     return render_template('formulaire.html')
                                                                                                                                        
 @app.route('/')
