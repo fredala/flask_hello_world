@@ -10,9 +10,9 @@ app = Flask(__name__)
 def nouveau():
     if request.method == 'POST':
         # Récupérer les données du formulaire
-        nom = request.form['nom']
-        prenom = request.form['prenom']
-        adresse = request.form['adresse']
+        #nom = request.form['nom']
+        #prenom = request.form['prenom']
+        #adresse = request.form['adresse']
         # Traiter les données (par exemple, les afficher dans la console)
         #conn = sqlite3.connect('database.db')
         #cursor = conn.cursor()
@@ -20,9 +20,9 @@ def nouveau():
         #cursor.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?);",'({nom}', '{prenom}', '{adresse}'))
         #data = cursor.fetchall()
         #conn.close()
-        print(f"Nom: {nom}")
-        print(f"prenom: {prenom}")
-        print(f"adresse: {adresse}")
+        #print(f"Nom: {nom}")
+        #print(f"prenom: {prenom}")
+        #print(f"adresse: {adresse}")
         return render_template('confirmation.html')
     return render_template('formulaire.html')
                                                                                                                                        
