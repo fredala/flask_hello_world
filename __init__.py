@@ -8,8 +8,6 @@ app = Flask(__name__)
 
 @app.route('/nouveau/', methods=['GET', 'POST'])
 def nouveau():
-    if request.method == 'POST':
-       return render_template('confirmation.html')
     return render_template('formulaire.html')
                                                                                                                                        
 @app.route('/')
