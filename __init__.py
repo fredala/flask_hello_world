@@ -6,7 +6,7 @@ import sqlite3
                                                                                                                                        
 app = Flask(__name__) 
 
-@app.route('/nouveau/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def nouveau():
     if request.method == 'POST':
         # Récupérer les données du formulaire
@@ -23,12 +23,12 @@ def nouveau():
         #print(f"Nom: {nom}")
         #print(f"prenom: {prenom}")
         #print(f"adresse: {adresse}")
-        return render_template('formulaire.html')
+        return render_template('confirmation.html')
     return render_template('formulaire.html')
                                                                                                                                        
-@app.route('/')
-def hello_world():
-    return render_template('hello.html')
+#@app.route('/')
+#def hello_world():
+ #   return render_template('hello.html')
 
 @app.route("/fr/")
 def monfr():
