@@ -18,28 +18,24 @@ def monfr():
 def rapport():
     return render_template('graphique.html')
 
-@app.route("/nouveau/", methods=['GET', 'POST']))
+@app.route('/nouveau/', methods=['GET', 'POST']))
 def nouveau():
-    #conn = sqlite3.connect('database.db')
-    #cursor = conn.cursor()
-    #cursor.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?);",('new', 'Thomas', '333, Rue de la Paix, 75002 Paris'))
-    #data = cursor.fetchall()
-    #conn.close()
-    #return render_template('nouveau.html')
-    if request.method == 'POST':
-        # Récupérer les données du formulaire
-        nom = request.form['nom']
-        prenom = request.form['prenom']
-        adresse = request.form['adresse']
-        
-        # Traiter les données (par exemple, les afficher dans la console)
-        print(f"Nom: {nom}")
-        print(f"prenom: {prenom}")
-        print(f"adresse: {adresse}")
-        
-        return render_template('confirmation.html')
-    
-    return render_template('formulaire.html')
+  if request.method == 'POST':
+    # Récupérer les données du formulaire
+    nom = request.form['nom']
+    prenom = request.form['prenom']
+    adresse = request.form['adresse']
+    # Traiter les données (par exemple, les afficher dans la console)
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?);",'({nom}', '{prenom}', '{adresse}'))
+    data = cursor.fetchall()
+    conn.close()
+    #print(f"Nom: {nom}")
+    #print(f"prenom: {prenom}")
+    #print(f"adresse: {adresse}")
+      return render_template('confirmation.html')
+  return render_template('formulaire.html')
 
 
 @app.route("/histogramme/")
