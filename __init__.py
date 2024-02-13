@@ -38,7 +38,7 @@ def monfr():
 def rapport():
     return render_template('graphique.html')
 
-@app.route("/table/")
+@app.route('/')
 def afficher_clients():
     # Récupération des données clients de la base de données
     conn = sqlite3.connect('database.db')
