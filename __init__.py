@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def afficher_clients():
-    print(f"Nom: {nom}")
+    print("Nom")
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM clients;")
