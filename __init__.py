@@ -16,25 +16,25 @@ def afficher_clients():
     return render_template('tableau.html', clients=clients)
 
 
-#@app.route('/', methods=['GET', 'POST'])
-#def nouveau():
-#    if request.method == 'POST':
-#        # Récupérer les données du formulaire
-#        nom = request.form['nom']
-#        prenom = request.form['prenom']
-#        adresse = request.form['adresse']
-#        # Traiter les données (par exemple, les afficher dans la console)
-#        conn = sqlite3.connect('database.db')
-#        cursor = conn.cursor()
-#        #cursor.execute('SELECT * FROM clients;')
-#        cursor.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?);", (nom, prenom, adresse))
-#        conn.commit()
-#        conn.close()
-#        #print(f"Nom: {nom}")
-#        #print(f"prenom: {prenom}")
-#        #print(f"adresse: {adresse}")
-#        return render_template('confirmation.html')
-#    return render_template('formulaire.html')
+@app.route('/', methods=['GET', 'POST'])
+def nouveau():
+    if request.method == 'POST':
+        # Récupérer les données du formulaire
+        nom = request.form['nom']
+        prenom = request.form['prenom']
+        adresse = request.form['adresse']
+        # Traiter les données (par exemple, les afficher dans la console)
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        #cursor.execute('SELECT * FROM clients;')
+        cursor.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?);", (nom, prenom, adresse))
+        conn.commit()
+        conn.close()
+        #print(f"Nom: {nom}")
+        #print(f"prenom: {prenom}")
+        #print(f"adresse: {adresse}")
+        return render_template('confirmation.html')
+    return render_template('formulaire.html')
                                                                                                                                        
 #@app.route('/')
 #def hello_world():
