@@ -6,6 +6,34 @@ import sqlite3
                                                                                                                                        
 app = Flask(__name__)
 
+@app.route('/t')
+def index():
+    # Requête pour récupérer les données de la table dans la base de données
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM clients")
+    data = cursor.fetchall()
+    cursor.close()
+    
+    # Rendu du template index.html avec les données récupérées
+    return render_template('index.html', data=data)
+
+@app.route('/edit', methods=['POST'])
+def edit():
+    # Récupération des données du formulaire
+    id = request.form['id']
+    value = request.form['value']
+    
+    # Requête pour mettre à jour la valeur dans la base de données
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("UPDATE clients SET value=%s WHERE id=%s", (value, id))
+    db.commit()
+    cursor.close()
+    
+    # Redirection vers la page d'accueil
+    return redirect('/')
+
 @app.route('/table/')
 def afficher_clients():
     conn = sqlite3.connect('database.db')
