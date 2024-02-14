@@ -18,7 +18,7 @@ def index():
     # Rendu du template index.html avec les données récupérées
     return render_template('t.html', data=data)
 
-@app.route('/edit/', methods=['POST'])
+@app.route('/edit', methods=['POST'])
 def edit():
     # Récupération des données du formulaire
     id = request.form['id']
