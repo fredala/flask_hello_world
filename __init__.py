@@ -16,7 +16,7 @@ def index():
     cursor.close()
     
     # Rendu du template index.html avec les données récupérées
-    return render_template('index.html', data=data)
+    return render_template('t.html', data=data)
 
 @app.route('/edit', methods=['POST'])
 def edit():
@@ -32,7 +32,7 @@ def edit():
     cursor.close()
     
     # Redirection vers la page d'accueil
-    return redirect('/')
+    return redirect('/t')
 
 @app.route('/table/')
 def afficher_clients():
