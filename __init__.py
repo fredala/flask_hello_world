@@ -11,7 +11,7 @@ def index():
     # Requête pour récupérer les données de la table dans la base de données
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT nom FROM clients")
+    cursor.execute("SELECT id,nom FROM clients")
     data = cursor.fetchall()
     cursor.close()
     
