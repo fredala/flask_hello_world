@@ -11,14 +11,14 @@ def index():
     # Requête pour récupérer les données de la table dans la base de données
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM clients")
+    cursor.execute("SELECT nom FROM clients")
     data = cursor.fetchall()
     cursor.close()
     
     # Rendu du template index.html avec les données récupérées
     return render_template('t.html', data=data)
 
-@app.route('/edit', methods=['POST'])
+@app.route('/edit/', methods=['POST'])
 def edit():
     # Récupération des données du formulaire
     id = request.form['id']
