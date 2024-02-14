@@ -6,7 +6,7 @@ import sqlite3
                                                                                                                                        
 app = Flask(__name__)
 
-@app.route('/t')
+@app.route('/t/')
 def index():
     # Requête pour récupérer les données de la table dans la base de données
     conn = sqlite3.connect('database.db')
@@ -32,7 +32,7 @@ def edit():
     cursor.close()
     
     # Redirection vers la page d'accueil
-    return redirect('/t')
+    return redirect('/t/')
 
 @app.route('/table/')
 def afficher_clients():
