@@ -27,7 +27,7 @@ def edit():
     # Requête pour mettre à jour la valeur dans la base de données
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    cursor.execute("UPDATE clients SET value=%s WHERE id=%s", (value, id))
+    cursor.execute("UPDATE clients SET nom=%s WHERE id=%s", (value, id))
     db.commit()
     cursor.close()
     
