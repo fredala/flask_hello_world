@@ -6,11 +6,11 @@ from urllib.request import urlopen
 #from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'mysql-msprtop.alwaysdata.net'
-app.config['MYSQL_USER'] = 'msprtop_admin'
-app.config['MYSQL_PASSWORD'] = 'ePSI2023!'
-app.config['MYSQL_DB'] = 'msprtop_crm'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+#app.config['MYSQL_HOST'] = 'mysql-msprtop.alwaysdata.net'
+#app.config['MYSQL_USER'] = 'msprtop_admin'
+#app.config['MYSQL_PASSWORD'] = 'ePSI2023!'
+#app.config['MYSQL_DB'] = 'msprtop_crm'
+#app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # Initialisation de l'extension MySQL
 #mysql = MySQL(app)
 
