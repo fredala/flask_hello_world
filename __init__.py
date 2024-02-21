@@ -3,23 +3,16 @@ from flask import render_template
 from flask import json
 from urllib.request import urlopen
 #import mysql.connector
-
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-mydb = mysql.connector.connect(
-    host="mysql-msprtop.alwaysdata.net",
-    user="msprtop_admin",
-    password="ePSI2023!",
-    database="msprtop_crm"
-)
 app.config['MYSQL_HOST'] = 'mysql-msprtop.alwaysdata.net'
 app.config['MYSQL_USER'] = 'msprtop_admin'
 app.config['MYSQL_PASSWORD'] = 'ePSI2023!'
 app.config['MYSQL_DB'] = 'msprtop_crm'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # Initialisation de l'extension MySQL
-#mysql = MySQL(app)
+mysql = MySQL(app)
 
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les sessions (à cacher par la suite)
