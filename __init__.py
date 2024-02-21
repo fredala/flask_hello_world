@@ -12,7 +12,7 @@ app.config['MYSQL_PASSWORD'] = 'ePSI2023!'
 app.config['MYSQL_DB'] = 'msprtop_crm'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # Initialisation de l'extension MySQL
-mysql = MySQL(app)
+#mysql = MySQL(app)
 
 
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les sessions (à cacher par la suite)
