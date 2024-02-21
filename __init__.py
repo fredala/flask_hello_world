@@ -3,7 +3,7 @@ from flask import render_template
 from flask import json
 from urllib.request import urlopen
 #import mysql.connector
-from flask_mysqldb import MySQL
+#from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'mysql-msprtop.alwaysdata.net'
