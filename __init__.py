@@ -43,20 +43,19 @@ def authentification():
     return render_template('formulaire_authentification.html', error=False)
 
 # Route Flask pour tester la connexion à la base de données
-#@app.route('/connexion')
-#def connexion():
-#    cursor = mydb.cursor()
-#    cursor.execute("SELECT * FROM clients")
-#    result = cursor.fetchall()
-#    #return render_template('connexion.html', donnees=result)
-#    return render_template('conn2.html', donnees=result)
-#    # Exemple de requête SQL pour récupérer des données
-#    cur = mysql.connection.cursor()
-#    cur.execute("SELECT * FROM clients")
-#    data = cur.fetchall()
-#    cur.close()
-#    
-#    return render_template('connexion.html', data=data)
+@app.route('/connexion')
+def connexion():
+    cursor = mydb.cursor()
+    cursor.execute("SELECT * FROM clients")
+    result = cursor.fetchall()
+    return render_template('connexion.html', donnees=result)
+    #return render_template('conn2.html', donnees=result)
+    # Exemple de requête SQL pour récupérer des données
+    #cur = mysql.connection.cursor()
+    #cur.execute("SELECT * FROM clients")
+    #data = cur.fetchall()
+    #cur.close()
+    #return render_template('connexion.html', donnees=result)
 
 
 @app.route('/accueil')
