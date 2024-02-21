@@ -1,134 +1,67 @@
-from flask import Flask, render_template_string, render_template, jsonify, request
+from flask import Flask, render_template_string, render_template, jsonify, request, redirect, url_for, session
 from flask import render_template
 from flask import json
 from urllib.request import urlopen
-import sqlite3
-                                                                                                                                       
+#import mysql.connector
+
+from flask_mysqldb import MySQL
+
 app = Flask(__name__)
+mydb = mysql.connector.connect(
+    host="mysql-msprtop.alwaysdata.net",
+    user="msprtop_admin",
+    password="ePSI2023!",
+    database="msprtop_crm"
+)
+app.config['MYSQL_HOST'] = 'mysql-msprtop.alwaysdata.net'
+app.config['MYSQL_USER'] = 'msprtop_admin'
+app.config['MYSQL_PASSWORD'] = 'ePSI2023!'
+app.config['MYSQL_DB'] = 'msprtop_crm'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+# Initialisation de l'extension MySQL
+mysql = MySQL(app)
 
-@app.route('/t/')
-def index():
-    # Requête pour récupérer les données de la table dans la base de données
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT id,nom FROM clients")
-    data = cursor.fetchall()
-    cursor.close()
-    
-    # Rendu du template index.html avec les données récupérées
-    return render_template('t.html', data=data)
 
-@app.route('/edit', methods=['POST'])
-def edit():
-    # Récupération des données du formulaire
-    id = request.form['id']
-    value = request.form['value']
-    
-    # Requête pour mettre à jour la valeur dans la base de données
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute("UPDATE clients SET nom='%s' WHERE id=%s", (value, id))
-    db.commit()
-    cursor.close()
-    
-    # Redirection vers la page d'accueil
-    return redirect('/t/')
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les sessions (à cacher par la suite)
 
-@app.route('/table/')
-def afficher_clients():
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM clients;")
-    clients = cursor.fetchall()
-    # Renvoyer les données clients au template HTML
-    return render_template('tableau.html', clients=clients)
-
+# Fonction pour créer une entrée "authentifie" dans la session de l'utilisateur
+def est_authentifie():
+    return session.get('authentifie')
 
 @app.route('/', methods=['GET', 'POST'])
-def nouveau():
+def authentification():
     if request.method == 'POST':
-        # Récupérer les données du formulaire
-        nom = request.form['nom']
-        prenom = request.form['prenom']
-        adresse = request.form['adresse']
-        # Traiter les données (par exemple, les afficher dans la console)
-        conn = sqlite3.connect('database.db')
-        cursor = conn.cursor()
-        #cursor.execute('SELECT * FROM clients;')
-        cursor.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?);", (nom, prenom, adresse))
-        conn.commit()
-        conn.close()
-        #print(f"Nom: {nom}")
-        #print(f"prenom: {prenom}")
-        #print(f"adresse: {adresse}")
-        return render_template('confirmation.html')
-    return render_template('formulaire.html')
-                                                                                                                                       
-#@app.route('/')
-#def hello_world():
- #   return render_template('hello.html')
+        # Vérifier les identifiants
+        if request.form['username'] == 'admin' and request.form['password'] == 'password': # password à cacher par la suite
+            session['authentifie'] = True
+            # Rediriger vers la route lecture après une authentification réussie
+            return redirect(url_for('accueil'))
+        else:
+            # Afficher un message d'erreur si les identifiants sont incorrects
+            return render_template('formulaire_authentification.html', error=True)
 
-@app.route("/fr/")
-def monfr():
-    return "<h2>Bonjour tout le monde !</h2>"
-  
-@app.route("/rapport/")
-def rapport():
-    return render_template('graphique.html')
+    return render_template('formulaire_authentification.html', error=False)
+
+# Route Flask pour tester la connexion à la base de données
+#@app.route('/connexion')
+#def connexion():
+#    cursor = mydb.cursor()
+#    cursor.execute("SELECT * FROM clients")
+#    result = cursor.fetchall()
+#    #return render_template('connexion.html', donnees=result)
+#    return render_template('conn2.html', donnees=result)
+#    # Exemple de requête SQL pour récupérer des données
+#    cur = mysql.connection.cursor()
+#    cur.execute("SELECT * FROM clients")
+#    data = cur.fetchall()
+#    cur.close()
+#    
+#    return render_template('connexion.html', data=data)
 
 
+@app.route('/accueil')
+def accueil():
+    return render_template('accueil.html')
 
-@app.route("/histogramme/")
-def histogramme():
-    return render_template('histogramme.html')
-
-
-  
-@app.route('/paris/')
-def meteo():
-    response = urlopen('https://api.openweathermap.org/data/2.5/forecast/daily?q=Paris,fr&cnt=16&appid=bd5e378503939ddaee76f12ad7a97608')
-    raw_content = response.read()
-    json_content = json.loads(raw_content.decode('utf-8'))
-    results = []
-    for list_element in json_content.get('list', []):
-        dt_value = list_element.get('dt')
-        temp_day_value = list_element.get('temp', {}).get('day') - 273.15 # Conversion de Kelvin en °c 
-        results.append({'Jour': dt_value, 'temp': temp_day_value})
-    return jsonify(results=results)
-
-@app.route('/consultation/')
-def ReadBDD():
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM clients;')
-    data = cursor.fetchall()
-    conn.close()
-    
-    # Rendre le template HTML et transmettre les données
-    return render_template('read_data.html', data=data)
-
-@app.route('/fiche_client/<int:post_id>')
-def Readfiche(post_id):
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM clients WHERE id = ?;', (post_id,))
-    data = cursor.fetchall()
-    conn.close()
-    
-    # Rendre le template HTML et transmettre les données
-    return render_template('read_data.html', data=data)
-
-
-@app.route('/search/<nom_search>')
-def Search(nom_search):
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM clients WHERE nom LIKE ?;", ('%' + nom_search +'%',))
-    data = cursor.fetchall()
-    conn.close()
-    
-    # Rendre le template HTML et transmettre les données
-    return render_template('read_data.html', data=data)
-                                                                                                                                 
 if __name__ == "__main__":
   app.run(debug=True)
